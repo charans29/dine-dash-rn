@@ -13,7 +13,7 @@ const Categories = () => {
     showsHorizontalScrollIndicator={false}>
         <CategoryCards 
         imgUrl={require('../assets/Chickpea.jpg')}
-        title="Food 1" className='space-x-2'/>
+        title="Food 1" />
         <CategoryCards 
         imgUrl={require('../assets/burger.png')}
         title="Food 2"/>
