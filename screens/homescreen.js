@@ -1,17 +1,33 @@
 import { View, Text, SafeAreaView, Image, TextInput, ScrollView } from 'react-native'
-import React, { useLayoutEffect }from 'react'
+import React, { useEffect, useLayoutEffect, useState }from 'react'
 import {useNavigation} from '@react-navigation/native'
 import { ChevronDownIcon, UserIcon, AdjustmentsVerticalIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
 import Categories from '../components/categories'
 import FeaturedRow from '../components/FeaturedRow'
+import client from '../sanity'
 
-const homescreen = () => {
+const HomeScreen = () => {
     const navigation = useNavigation();
+    const [featuredCategory, setFeaturedCategory] = useState([]);
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerShown:false,
         })
+    }, [])
+
+    useEffect(() => {
+      client.fetch(
+        `*[_type == 'featured'] {
+          ...,
+          restaurants[]->{
+            ...,
+            dishes[]->
+            }
+          }`
+      ).then(data => {
+        setFeaturedCategory(data)
+      })
     }, [])
      
   return (
@@ -31,7 +47,7 @@ const homescreen = () => {
       <View className='flex-row items-center space-x-2 pb-2 mx-4'>
           <View className='flex-row flex-1 space-x-2 bg-gray-200 p-3'>
               <MagnifyingGlassIcon color='gray'/>
-              <TextInput placeholder='Reastaurants and Cuisines ' keyboardType='Default' className='flex-1'/>  
+              <TextInput placeholder='Reastaurants and Cuisines ' keyboardType='default' className='flex-1'/>  
           </View>
           <AdjustmentsVerticalIcon color='#00CCBB'/>
       </View>
@@ -40,33 +56,25 @@ const homescreen = () => {
           paddingBottom: 100
         }}>
           <Categories />
-          <FeaturedRow
+          {
+            featuredCategory.map(category => (
+              <FeaturedRow
+              key={category._id}
+              id={category._id}
+              title={category.name}
+              description={category.short_description}
+            />
+            ))
+          }
+          {/* <FeaturedRow
             id="1"
             title="Tasty Discounts"
             description="Support ur local restaraunt tonight"
-            featuredCategory="Offers %"
-          />
-          <FeaturedRow
-            id="2"
-            title="Tasty Discounts"
-            description="Support ur local restaraunt tonight"
-            featuredCategory="Offers %"
-          />
-          <FeaturedRow
-            id="3"
-            title="Tasty Discounts"
-            description="Support ur local restaraunt tonight"
-            featuredCategory="Offers %"
-          />
-          <FeaturedRow
-            id="3"
-            title="Tasty Discounts"
-            description="Support ur local restaraunt tonight"
-            featuredCategory="Offers %"
-          />
+          /> */}
+          
         </ScrollView>
     </SafeAreaView>
   )
 }
 
-export default homescreen
+export default HomeScreen
