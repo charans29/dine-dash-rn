@@ -19,6 +19,8 @@ const RestaurantScreen = () => {
       imgUrl,
       title,
       rating,
+      lat,
+      lon,
       genre,
       address,
       shortDescription,
@@ -33,6 +35,8 @@ const RestaurantScreen = () => {
         imgUrl,
         title,
         rating,
+        lat,
+        lon,
         genre,
         address,
         shortDescription,
@@ -47,7 +51,7 @@ const RestaurantScreen = () => {
     });
   }, [])
   
-
+  // console.log("[_-_-__-_-_]:-", dishes.length)
   return (
     <> 
       <ScrollView>
@@ -79,20 +83,24 @@ const RestaurantScreen = () => {
           </TouchableOpacity>
         </View>
         <Text className="p-4 font-bold text-xl">Menu</Text>
-        <View className="pb-36">
-          {
-            dishes.map(dish => (
-              <DishRow 
-                key={dish._id}
-                id={dish._id}
-                dish={dish.name}
-                description={dish.short_description}
-                price={dish.price}
-                imgUrl={dish.image}
-              />
-            ))
-          }
-        </View>
+        {
+          dishes ?
+          <View className="pb-36">
+            {
+              dishes.map(dish => (
+                <DishRow 
+                  key={dish._id}
+                  id={dish._id}
+                  dish={dish.name}
+                  description={dish.short_description}
+                  price={dish.price}
+                  imgUrl={dish.image}
+                />
+              )) 
+            }
+          </View>
+          : <Text className="text-gray-400 text-lg font-semibold py-44 text-center">Dishes are yet to publish</Text>
+        }
       </ScrollView>
       <BasketBar/>
     </>

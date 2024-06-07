@@ -8,6 +8,8 @@ export const restaurantSlice = createSlice({
       imgUrl: null,
       title: null,
       rating: null,
+      lat:null,
+      lon:null,
       genre: null,
       address: null,
       shortDescription: null,

@@ -56,6 +56,8 @@ const FeaturedRow = ({id, title, description}) => {
                         id={resto._id}
                         title={resto.title}
                         rating={resto.rating}
+                        lat={resto.lat}
+                        lon={resto.lon}
                         genre={resto.type?.name}
                         address={resto.address}
                         shortDescription={resto.short_description}
@@ -63,19 +65,6 @@ const FeaturedRow = ({id, title, description}) => {
                     />
                 ))
             }
-
-            {/* <RestaurantCards 
-                id="1"
-                imgUrl={require('../assets/Wings.jpg')}
-                title="RC!"
-                rating={4.5}
-                genre="Inidan"
-                address="hyderabad"
-                shortDescription="This is heaven"
-                dishes={[]}
-                long={-12.888} 
-                lat={+12.999}
-            /> */}
         </ScrollView>
     </View>
   )

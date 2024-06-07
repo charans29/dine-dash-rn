@@ -66,12 +66,6 @@ const HomeScreen = () => {
             />
             ))
           }
-          {/* <FeaturedRow
-            id="1"
-            title="Tasty Discounts"
-            description="Support ur local restaraunt tonight"
-          /> */}
-          
         </ScrollView>
     </SafeAreaView>
   )
