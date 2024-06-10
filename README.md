@@ -28,7 +28,7 @@ Capp is a centralized food delivery app built using React Native. The app offers
 To run the Capp food delivery app on your local machine, follow these steps:
 
 1. Clone the repository:
-git clone https://github.com/charans29/dine-dash-rn.git
+`git clone https://github.com/charans29/dine-dash-rn.git`
 
 2. Navigate to the project directory:
 cd dine-dash-rn
